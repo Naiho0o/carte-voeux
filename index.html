@@ -21,6 +21,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
@@ -28,7 +29,7 @@
       margin-bottom: 20px;
     }
 
-    /* model-viewer invisible mais fonctionnel */
+    /* model-viewer invisible mais nécessaire pour déclencher AR */
     model-viewer {
       width: 0;
       height: 0;
@@ -38,7 +39,7 @@
       left: -9999px;
     }
 
-    /* Bouton AR externe */
+    /* Bouton AR */
     #startAR {
       background-color: #ff4757;
       border: none;
@@ -50,10 +51,19 @@
       box-shadow: 0 6px 18px rgba(0,0,0,0.4);
       z-index: 10;
       transition: 0.15s;
+      display: none; /* caché par défaut (affiché sur mobile) */
     }
 
     #startAR:active {
       transform: scale(0.95);
+    }
+
+    /* Message visible seulement sur PC */
+    #pcMessage {
+      font-size: 1rem;
+      opacity: 0.75;
+      display: none; /* caché par défaut, affiché sur PC */
+      max-width: 80%;
     }
   </style>
 </head>
@@ -62,7 +72,12 @@
 
   <h1>🎄 Joyeux Noël ! 🎁</h1>
 
-  <!-- Model viewer caché -->
+  <div id="pcMessage">
+    La réalité augmentée est disponible uniquement sur téléphone 📱<br>
+    Ouvre cette page sur ton smartphone pour voir le cadeau en AR ✨
+  </div>
+
+  <!-- Model viewer invisible -->
   <model-viewer id="mv"
     src="theTrueGift.glb"
     ios-src="theTrueGift.usdc"
@@ -74,23 +89,17 @@
     model-scale="0.02">
   </model-viewer>
 
-  <!-- Bouton AR indépendant -->
+  <!-- Bouton AR externe -->
   <button id="startAR">Voir en AR 🎁</button>
 
-  <!-- Script d'activation AR -->
+  <!-- Script : détecte si c'est mobile ou PC -->
   <script>
     const mv = document.getElementById('mv');
     const btn = document.getElementById('startAR');
+    const pcMsg = document.getElementById('pcMessage');
 
-    btn.addEventListener('click', () => {
-      if (mv.canActivateAR) {
-        mv.activateAR();
-      } else {
-        alert("La réalité augmentée n'est pas disponible sur cet appareil.");
-      }
-    });
-  </script>
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-</body>
-</html>
-
+    if (isMobile) {
+      btn.style.display = "block";   // Montrer bouton sur téléphone
+      pcMsg.style.display = "none";  /
