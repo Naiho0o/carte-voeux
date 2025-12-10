@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Joyeux Noël en AR</title>
+  <title>Joyeux Noël</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- model-viewer -->
@@ -22,11 +22,23 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      overflow: hidden;
+    }
+
+    /* NEIGE EN OVERLAY */
+    #snowOverlay {
+      position: fixed;
+      inset: 0;
+      background: url("neige.gif") center center / cover;
+      pointer-events: none; /* laisse passer les clics vers le bouton */
+      z-index: 3; /* devant le fond, derrière le texte/bouton */
+      opacity: 1; /* ajuste si tu veux une neige plus discrète */
     }
 
     h1 {
       font-size: 2rem;
       margin-top: -450px;
+      z-index: 10; /* passe au-dessus de la neige */
     }
 
     /* model-viewer invisible mais fonctionnel */
@@ -41,31 +53,33 @@
 
     /* Bouton AR externe */
     #startAR {
-  background-color: #ff4757;
-  border: none;
-  border-radius: 12px;
-  color: white;
-  font-size: 1.4rem;
-  padding: 15px 30px;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-  z-index: 10;
-  transition: 0.15s;
+      background-color: #ff4757;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1.4rem;
+      padding: 15px 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      z-index: 10; /* bouton au-dessus de la neige */
+      transition: 0.15s;
 
-  /* Positionnement */
-  position: fixed;
-  bottom: 400px;        /* ⬅️ remonte le bouton */
-  left: 50%;
-  transform: translateX(-50%);
-}
+      position: fixed;
+      bottom: 400px; /* remonte le bouton */
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
     #startAR:active {
-      transform: scale(0.95);
+      transform: translateX(-50%) scale(0.95);
     }
   </style>
 </head>
 
 <body>
+
+  <!-- NEIGE EN OVERLAY -->
+  <div id="snowOverlay"></div>
 
   <h1>🎄 Joyeux Noël ! 🎄</h1>
 
