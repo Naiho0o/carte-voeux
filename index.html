@@ -2,39 +2,91 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Carte de vœux AR 🎁</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joyeux Noël en AR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Import du composant model-viewer -->
+  <!-- Import du composant <model-viewer> -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       background: #0b1020;
-      font-family: Arial, sans-serif;
-      color: white;
       overflow: hidden;
-      text-align: center;
-    }
-
-    h1 {
-      margin-top: 10px;
-      font-size: 1.8rem;
+      color: white;
+      font-family: sans-serif;
     }
 
     model-viewer {
       width: 100vw;
-      height: 80vh;
+      height: 100vh;
     }
 
+    /* TITRE */
+    .title {
+      position: fixed;
+      top: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* BOUTON AR OFFICIEL */
     .ar-button {
-      position: absolute;
-      bottom: 20px;
+      background-color: #ff4757;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-family: inherit;
+      font-size: 1.4rem;
+      padding: 15px 25px;
+      position: fixed;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
-      background: #ff2e63;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      font
+      z-index: 10;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+
+    .ar-button:active {
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    .ar-button[disabled] {
+      background-color: #888;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="title">🎄 Joyeux Noël ! 🎁</div>
+
+  <!-- Composant 3D -->
+  <model-viewer id="gift"
+  src="theTrueGift1.glb"
+  ios-src="theTrueGift.usdc"
+  alt="Cadeau de Noël"
+  ar
+  ar-modes="scene-viewer quick-look webxr"
+  camera-controls
+  auto-rotate
+  shadow-intensity="1"
+  scale="1 1 1"
+  scale="3 3 3"
+  environment-image="neutral">
+
+  <button slot="ar-button" class="ar-button">
+    Voir en AR 🎁
+  </button>
+
+</model-viewer>
+
+</body>
+</html>
