@@ -5,6 +5,7 @@
   <title>Joyeux Noël en AR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
@@ -27,7 +28,7 @@
       margin-bottom: 20px;
     }
 
-    /* Model Viewer invisible mais nécessaire */
+    /* model-viewer invisible mais fonctionnel */
     model-viewer {
       width: 0;
       height: 0;
@@ -37,7 +38,7 @@
       left: -9999px;
     }
 
-    /* Bouton AR */
+    /* Bouton AR externe */
     #startAR {
       background-color: #ff4757;
       border: none;
@@ -47,14 +48,12 @@
       padding: 15px 30px;
       cursor: pointer;
       box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-      display: none; /* invisible au début */
+      z-index: 10;
+      transition: 0.15s;
     }
 
-    #pcMessage {
-      font-size: 1rem;
-      opacity: 0.75;
-      display: none;
-      max-width: 80%;
+    #startAR:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
@@ -63,11 +62,7 @@
 
   <h1>🎄 Joyeux Noël ! 🎁</h1>
 
-  <div id="pcMessage">
-    La réalité augmentée est disponible uniquement sur téléphone 📱<br>
-    Ouvre cette page sur ton smartphone pour voir le cadeau en AR ✨
-  </div>
-
+  <!-- Model viewer caché -->
   <model-viewer id="mv"
     src="theTrueGift.glb"
     ios-src="theTrueGift.usdc"
@@ -79,28 +74,21 @@
     model-scale="0.02">
   </model-viewer>
 
+  <!-- Bouton AR indépendant -->
   <button id="startAR">Voir en AR 🎁</button>
 
+  <!-- Script d'activation AR -->
   <script>
     const mv = document.getElementById('mv');
     const btn = document.getElementById('startAR');
-    const pcMsg = document.getElementById('pcMessage');
 
-    // Attendre que model-viewer ait fini de se charger
-    mv.addEventListener('load', () => {
-
-      // Si l'appareil PEUT lancer l'AR
+    btn.addEventListener('click', () => {
       if (mv.canActivateAR) {
-        btn.style.display = "block";    // Affiche le bouton AR
-        pcMsg.style.display = "none";   // Cache le message PC
-      } 
-      else {
-        btn.style.display = "none";     // Cache le bouton AR
-        pcMsg.style.display = "block";  // Affiche le message PC
+        mv.activateAR();
+      } else {
+        alert("La réalité augmentée n'est pas disponible sur cet appareil.");
       }
     });
-
-    btn.addEventListener('click', () => mv.activateAR());
   </script>
 
 </body>
