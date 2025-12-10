@@ -67,27 +67,50 @@
 </head>
 <body>
 
-  <!-- Composant AR -->
+  <!-- Le composant 3D -->
   <model-viewer
-  src="https://modelviewer.dev/shared-assets/models/ShopifyModels/Chair.glb"
-  ios-src="https://modelviewer.dev/shared-assets/models/ShopifyModels/Chair.usdz"
-  ar
-  ar-modes="scene-viewer quick-look webxr"
-  camera-controls
-  auto-rotate
-  shadow-intensity="1"
-></model-viewer>
+    id="gift"
+    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+    alt="Cadeau de Noël en réalité augmentée"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1">
+  </model-viewer>
 
+  <!-- Gros bouton AR -->
+  <button id="arButton">🎄 MODE AR 🎁</button>
 
-  <div class="wrap">
-    <h1>🎄 Joyeux Noël !</h1>
-    <p>Tape sur le bouton AR pour déposer l’objet dans ta pièce.</p>
-    <p class="hint">Si tu es sur PC, tu verras le modèle en 3D classique.<br>Sur téléphone, tu auras la vue AR native.</p>
-  </div>
+  <style>
+    #arButton {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 12px;
+      background: #ff4757;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      cursor: pointer;
+      z-index: 10;
+    }
 
-  <div class="badge">
-    Prototype AR ✨
-  </div>
+    #arButton:active {
+      transform: translateX(-50%) scale(0.95);
+    }
+  </style>
+
+  <script>
+    const modelViewer = document.querySelector("#gift");
+    document.querySelector("#arButton").addEventListener("click", () => {
+      modelViewer.enterAR();
+    });
+  </script>
 
 </body>
 </html>
