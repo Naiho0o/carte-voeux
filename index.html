@@ -19,20 +19,26 @@
       font-family: sans-serif;
     }
 
-    model-viewer {
-      width: 100vw;
-      height: 100vh;
-    }
-
     /* TITRE */
     .title {
       position: fixed;
-      top: 20px;
+      top: 30px;
       width: 100%;
       text-align: center;
       font-size: 2rem;
       z-index: 5;
       pointer-events: none;
+    }
+
+    /* Le model-viewer est invisible pour enlever la 3D */
+    model-viewer {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      left: -9999px;
+      top: -9999px;
     }
 
     /* BOUTON AR OFFICIEL */
@@ -68,25 +74,23 @@
 
   <div class="title">🎄 Joyeux Noël ! 🎁</div>
 
-  <!-- Composant 3D -->
+  <!-- MODEL VIEWER INVISIBLE (AR ONLY) -->
   <model-viewer id="gift"
-  src="theTrueGift.glb"
-  ios-src="theTrueGift.usdc"
-  alt="Cadeau de Noël"
-  ar
-  ar-modes="scene-viewer quick-look webxr"
-  camera-controls
-  auto-rotate
-  shadow-intensity="1"
-  scale="1 1 1"
-  scale="3 3 3"
-  environment-image="neutral">
+    src="theTrueGift.glb"
+    ios-src="theTrueGift.usdc"
+    alt="Cadeau de Noël"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    camera-controls
+    shadow-intensity="1"
+    environment-image="neutral"
+    model-scale="0.02">
 
-  <button slot="ar-button" class="ar-button">
-    Voir en AR 🎁
-  </button>
+    <button slot="ar-button" class="ar-button">
+      Voir en AR 🎁
+    </button>
 
-</model-viewer>
+  </model-viewer>
 
 </body>
 </html>
