@@ -41,17 +41,23 @@
 
     /* Bouton AR externe */
     #startAR {
-      background-color: #ff4757;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-size: 1.4rem;
-      padding: 15px 30px;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-      z-index: 10;
-      transition: 0.15s;
-    }
+  background-color: #ff4757;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.4rem;
+  padding: 15px 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  z-index: 10;
+  transition: 0.15s;
+
+  /* Positionnement */
+  position: fixed;
+  bottom: 120px;        /* ⬅️ remonte le bouton */
+  left: 50%;
+  transform: translateX(-50%);
+}
 
     #startAR:active {
       transform: scale(0.95);
