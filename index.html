@@ -14,23 +14,29 @@
       padding: 0;
       height: 100%;
       background: #0b1020;
-      overflow: hidden;
       color: white;
       font-family: sans-serif;
-    }
-
-    /* TITRE */
-    .title {
-      position: fixed;
-      top: 30px;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;   /* Centrer verticalement */
+      align-items: center;       /* Centrer horizontalement */
       text-align: center;
-      font-size: 2rem;
-      z-index: 5;
-      pointer-events: none;
+      overflow: hidden;
     }
 
-    /* Le model-viewer est invisible pour enlever la 3D */
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 40px;
+      padding: 0 20px;
+    }
+
+    /* MODEL-VIEWER INVISIBLE */
     model-viewer {
       width: 0;
       height: 0;
@@ -38,43 +44,45 @@
       pointer-events: none;
       position: absolute;
       left: -9999px;
-      top: -9999px;
     }
 
-    /* BOUTON AR OFFICIEL */
+    /* BOUTON AR RESPONSIVE */
     .ar-button {
       background-color: #ff4757;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       color: white;
-      font-family: inherit;
       font-size: 1.4rem;
-      padding: 15px 25px;
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      padding: 15px 30px;
       cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+      z-index: 10;
+      transition: 0.15s;
     }
 
     .ar-button:active {
-      transform: translateX(-50%) scale(0.95);
+      transform: scale(0.95);
     }
 
-    .ar-button[disabled] {
-      background-color: #888;
-      cursor: not-allowed;
+    /* Ajustement automatique pour petits téléphones */
+    @media (max-height: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      .ar-button {
+        font-size: 1.1rem;
+        padding: 12px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="title">🎄 Joyeux Noël ! 🎁</div>
+  <h1>🎄 Joyeux Noël ! 🎁</h1>
+  <div class="subtitle">Clique pour voir apparaître ton cadeau en réalité augmentée ✨</div>
 
-  <!-- MODEL VIEWER INVISIBLE (AR ONLY) -->
+  <!-- MODEL-VIEWER INVISIBLE (AR ONLY) -->
   <model-viewer id="gift"
     src="theTrueGift.glb"
     ios-src="theTrueGift.usdc"
