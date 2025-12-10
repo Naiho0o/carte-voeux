@@ -5,7 +5,6 @@
   <title>Joyeux Noël en AR</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- model-viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
@@ -21,7 +20,6 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      overflow: hidden;
     }
 
     h1 {
@@ -29,7 +27,7 @@
       margin-bottom: 20px;
     }
 
-    /* model-viewer invisible mais nécessaire pour déclencher AR */
+    /* Model Viewer invisible mais nécessaire */
     model-viewer {
       width: 0;
       height: 0;
@@ -49,20 +47,13 @@
       padding: 15px 30px;
       cursor: pointer;
       box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-      z-index: 10;
-      transition: 0.15s;
-      display: none; /* caché par défaut (affiché sur mobile) */
+      display: none; /* invisible au début */
     }
 
-    #startAR:active {
-      transform: scale(0.95);
-    }
-
-    /* Message visible seulement sur PC */
     #pcMessage {
       font-size: 1rem;
       opacity: 0.75;
-      display: none; /* caché par défaut, affiché sur PC */
+      display: none;
       max-width: 80%;
     }
   </style>
@@ -77,7 +68,6 @@
     Ouvre cette page sur ton smartphone pour voir le cadeau en AR ✨
   </div>
 
-  <!-- Model viewer invisible -->
   <model-viewer id="mv"
     src="theTrueGift.glb"
     ios-src="theTrueGift.usdc"
@@ -89,17 +79,29 @@
     model-scale="0.02">
   </model-viewer>
 
-  <!-- Bouton AR externe -->
   <button id="startAR">Voir en AR 🎁</button>
 
-  <!-- Script : détecte si c'est mobile ou PC -->
   <script>
     const mv = document.getElementById('mv');
     const btn = document.getElementById('startAR');
     const pcMsg = document.getElementById('pcMessage');
 
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    // Attendre que model-viewer ait fini de se charger
+    mv.addEventListener('load', () => {
 
-    if (isMobile) {
-      btn.style.display = "block";   // Montrer bouton sur téléphone
-      pcMsg.style.display = "none";  /
+      // Si l'appareil PEUT lancer l'AR
+      if (mv.canActivateAR) {
+        btn.style.display = "block";    // Affiche le bouton AR
+        pcMsg.style.display = "none";   // Cache le message PC
+      } 
+      else {
+        btn.style.display = "none";     // Cache le bouton AR
+        pcMsg.style.display = "block";  // Affiche le message PC
+      }
+    });
+
+    btn.addEventListener('click', () => mv.activateAR());
+  </script>
+
+</body>
+</html>
