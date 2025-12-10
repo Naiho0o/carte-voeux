@@ -69,27 +69,14 @@
   <div class="title">🎄 Joyeux Noël ! 🎁</div>
 
   <!-- Composant 3D -->
-  <model-viewer id="gift"
+  <model-viewer
   src="theTrueGift1.glb"
   ios-src="theTrueGift.usdc"
-  alt="Cadeau de Noël"
   ar
   ar-modes="scene-viewer quick-look webxr"
   camera-controls
-  auto-rotate
-  shadow-intensity="1"
-  scale="150 150 150"
-  environment-image="neutral">
-
-  <button slot="ar-button" class="ar-button">
-    Voir en AR 🎁
-  </button>
-
+  model-scale="0.05"
+  auto-rotate>
 </model-viewer>
-
-
-
-
-
 </body>
 </html>
