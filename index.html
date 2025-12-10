@@ -70,21 +70,21 @@
 
   <!-- Composant 3D -->
   <model-viewer id="gift"
-    src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
-    alt="Modèle 3D"
-    ar
-    ar-modes="scene-viewer quick-look webxr"
-    camera-controls
-    auto-rotate
-    shadow-intensity="1"
-    environment-image="neutral">
+  src="https://cdn.jsdelivr.net/gh/ChaptGPTAssets/giftbox/simple-gift.glb"
+  ios-src="https://cdn.jsdelivr.net/gh/ChaptGPTAssets/giftbox/simple-gift.usdz"
+  alt="Cadeau de Noël"
+  ar
+  ar-modes="scene-viewer quick-look webxr"
+  camera-controls
+  auto-rotate
+  shadow-intensity="1"
+  environment-image="neutral">
+  
+  <button slot="ar-button" class="ar-button">
+    Voir en AR 🎁
+  </button>
+</model-viewer>
 
-    <!-- Bouton AR natif -->
-    <button slot="ar-button" class="ar-button">
-      Voir en AR
-    </button>
-
-  </model-viewer>
 
 </body>
 </html>
